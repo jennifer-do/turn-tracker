@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+    color: #eeeeee;
+    background-color: #222831;
+}
+
+.character-card{
+    border-radius: 5px;
+    margin: 1em;
+    padding: 1em;
+    background-color: #d65a31;
+}
+
+input[type='number']{
+    width: 50px;
+}
