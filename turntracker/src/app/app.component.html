@@ -1,38 +1,45 @@
 <body>
-  <ng-container *ngFor="let c of characters">
-    <div class="character-card">
-        <label>
-          Name:
-          <input type="text" [(ngModel)]="c.name">
-        </label>
-        <br>
-        <label>
-          Initiative:
-          <input type="number" [(ngModel)]="c.initiative">
-        </label>
-        <label>
-          Dex Modifier:
-          <input type="number" [(ngModel)]="c.dex_mod">
-        </label>
-        <br>
-        <label>
-          HP:
-          <input type="number" [(ngModel)]="c.curr_hp">
-          /
-          <input type="number" [(ngModel)]="c.max_hp">
-        </label>
-        <br>
-        <input #changeHP type="number" value="0">
-        <button (click)="changeCurrentHp(c, changeHP)">Change HP</button>
-        <br>
-        <label>
-          Alert:
-          <input type="checkbox" [(ngModel)]="c.alert">
-        </label>
+  <ng-container *ngFor="let c of characters; let i = index">
+    <div [ngClass]="{'selected-character-card': i == character_turn, 'character-card': i != character_turn}">
+        <div>
+          <label>
+            Name:
+            <input type="text" [(ngModel)]="c.name">
+          </label>
+          <br>
+          <label>
+            Initiative:
+            <input type="number" [(ngModel)]="c.initiative">
+          </label>
+          <label>
+            Dex Modifier:
+            <input type="number" [(ngModel)]="c.dex_mod">
+          </label>
+        </div>
+        <div style="margin-left: auto; margin-right: 0">
+          <label>
+            HP:
+            <input type="number" [(ngModel)]="c.curr_hp">
+            /
+            <input type="number" [(ngModel)]="c.max_hp">
+          </label>
+          <br>
+          <input #changeHP type="number" value="0">
+          <button (click)="changeCurrentHp(c, changeHP)">Change HP</button>
+          <br>
+          <label>
+            Alert:
+            <input type="checkbox" [(ngModel)]="c.alert">
+          </label>
+        </div>
+        
     </div>
   </ng-container>
-  <button (click)="addCharacter()">Add Character</button>
-  <button (click)="clear()">Clear Turn Tracker</button>
-  <button (click)="showCharacterInfo()">Show Info</button>
-  <button (click)="sortByInitiative()">Sort</button>
+  <div id="buttons">
+    <button (click)="addCharacter()">Add Character</button>
+    <button (click)="clear()">Clear Turn Tracker</button>
+    <button (click)="sortByInitiative()">Sort</button>
+    <button (click)="nextTurn()">{{character_turn == -1 ? "Start Combat" : "Next Turn"}}</button>
+  </div>
+
 </body>

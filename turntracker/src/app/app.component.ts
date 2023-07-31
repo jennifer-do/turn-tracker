@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +8,9 @@ import { FormBuilder } from '@angular/forms';
 export class AppComponent {
   title = 'turntracker';
   characters: Character[] = [];
-  character_form = this.fb.group({
-    name: [''],
-    initiative: [0],
-    dex_mod: [0],
-    current_hp: [0],
-    max_hp: [0],
-    alert: [false]
-  })
+  character_turn: number = -1;
 
-  constructor(private fb: FormBuilder){
+  constructor(){
     // add at least one character
     this.characters.push(new Character());
   }
@@ -53,6 +45,13 @@ export class AppComponent {
     let changeByInt: number = +inputElement.value;
     c.curr_hp += changeByInt;
     inputElement.value = '0';
+  }
+
+  nextTurn(){
+    if(this.character_turn < this.characters.length-1)
+      this.character_turn += 1;
+    else
+      this.character_turn = 0;
   }
 }
 
