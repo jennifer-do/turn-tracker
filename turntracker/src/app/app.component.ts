@@ -25,6 +25,7 @@ export class AppComponent {
 
   clear(){
     this.characters = [new Character()];
+    this.character_turn = -1;
   }
 
   // for debugging
